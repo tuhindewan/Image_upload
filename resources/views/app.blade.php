@@ -6,11 +6,25 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
-    <title>Hello, world!</title>
+    <title>Image upload using Laravel and VueJS</title>
   </head>
   <body>
     <div id="app">
-      
+      <div class="container">
+        <div class="row">
+          @if(count($errors))
+            @foreach($errors->all() as $error)
+              <span class="text-danger">{{ $error }}</span>
+            @endforeach
+          @endif
+          <form action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
+            {{csrf_field()}}
+            <img src="storage/img1.jpg" alt="image">
+            <input type="file" name="image">
+            <input type="submit" value="Upload" class="btn btn-success" name="submit">
+          </form>
+        </div>
+      </div>
     </div>
     
     
